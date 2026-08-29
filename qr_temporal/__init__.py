@@ -14,6 +14,16 @@ from .qtd2 import (
     unpack_blind,
     inspect_blind,
 )
+from .qtd3 import (
+    RepoBlob,
+    QTD3Entry,
+    QTD3Model,
+    PackedQTD3,
+    train_qtd3,
+    pack_blind_v3,
+    unpack_v3,
+    inspect_v3,
+)
 
 __all__ = [
     "pack", "unpack", "inspect", "Packed",
@@ -23,4 +33,6 @@ __all__ = [
     "pack_v2", "unpack_v2", "inspect_v2", "PackedV2",
     "HistoricalSnapshot", "ChunkEntry", "QTD2Model", "PackedBlind",
     "fastcdc", "train_qtd2", "pack_blind", "unpack_blind", "inspect_blind",
+    "RepoBlob", "QTD3Entry", "QTD3Model", "PackedQTD3",
+    "train_qtd3", "pack_blind_v3", "unpack_v3", "inspect_v3",
 ]
