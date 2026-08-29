@@ -1,0 +1,2 @@
+Base qr_compress commit: 214572ef64efa62e1ac579d3c5c8984728827f9e
+Historical ai_compress exact corpus baseline: 76 systems, seed 20260730, 11 x 32768 B.
