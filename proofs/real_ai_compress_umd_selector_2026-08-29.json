@@ -1,0 +1,34 @@
+{
+  "proof_date": "2026-08-29",
+  "source_repository": "Shtenco/ai_compress",
+  "source_ref": "main",
+  "source_path": "compression_lab/umd_selector.py",
+  "source_bytes": 1553,
+  "git_blob_sha1": "570901580714dabc86e5f3b2305a8147bef2ef2b",
+  "source_sha256": "338ba6009f611789aea3cbe11f5cf10d876ccc1b2ef9816abca1dbd826fa71f2",
+  "qtc2": {
+    "mode": "exact",
+    "model_coverage_percent": "100",
+    "payload_bytes": 0,
+    "container_bytes": 108,
+    "qtd1_model_bytes": 1622,
+    "cold_total_bytes": 1730,
+    "byte_equal": true,
+    "sha256_equal": true,
+    "model_id_sha256": "9bed3e22976b2e0cc8d494dcb15b73e9877b1467d9f732bfab1dc044b3ca8507",
+    "unix_ns": 1787990000000079363,
+    "temporal_slot": 1705160140991
+  },
+  "metrics": {
+    "transport_reduction_percent": "93.045717965228589826142949130714745653573728267869",
+    "timestamp_8byte_theoretical_reduction_percent": "99.484867997424339987121699935608499678042498390212",
+    "cold_reduction_percent": "-11.397295556986477784932388924661944623309723116550",
+    "target_percent": "99.9999999",
+    "target_met_by_transport_container": false,
+    "target_met_by_8byte_timestamp_only": false,
+    "minimum_source_bytes_for_108_byte_container_at_target": 108000000000,
+    "minimum_source_bytes_for_8_byte_timestamp_at_target": 8000000000,
+    "minimum_source_bytes_for_1_byte_code_at_target": 1000000000
+  },
+  "interpretation": "The real repository file is recovered exactly with zero QTC2 residual and 100% shared-model coverage. This is not 99.9999999% physical byte compression: the transmitted QTC2 container is 108 bytes, and the external QTD1 model contains the source information."
+}
