@@ -1,0 +1,83 @@
+{
+  "method": "QTD2 blind Git-history benchmark",
+  "training": [
+    {
+      "commit": "69a1926fb7fbf9e2685e7cc42abdd1643a9545d7",
+      "bytes": 1261,
+      "git_blob_sha1": "2b5c55172e7234a948bb0b9f89f18beb5e369169",
+      "sha256": "ca3f6594c695e42103ce79813bec1379ef7a3e7497b6e91c5fd06c7d7f7811c9",
+      "unix_ns": 1785424759000000000
+    },
+    {
+      "commit": "9832a2d424b8500bfcc01e088f6119f1419a09bb",
+      "bytes": 1837,
+      "git_blob_sha1": "8dfc12344e6570da5103ebbe485b5fe60cede6ba",
+      "sha256": "14fc36de05354e580f629479cb60ad547c9c23b8d67c434dcadb08cbbbd8602d",
+      "unix_ns": 1785433545000000000
+    }
+  ],
+  "target": {
+    "commit": "79915e036d80f98be9e72aa6dbd6b37a8d135f45",
+    "bytes": 2787,
+    "git_blob_sha1": "a0f96cb4e53b84d15963b165b514ce0e65986745",
+    "sha256": "4ce8d5577aad836ea1efb8a23358784a1aba7bdd98e9fb5b60de9833722b66aa",
+    "sha256_absent_from_training": true,
+    "unix_ns": 1785434767000000000
+  },
+  "best": {
+    "profile": [48, 96, 192],
+    "codec": "brotli-11-refstream",
+    "codec_id": 4,
+    "original_size": 2787,
+    "model_bytes": 2892,
+    "model_chunks": 18,
+    "model_id": "423ac533415872f373bb4d064f33aa065e3b78f9e7f7b3729b50586574f8d354",
+    "covered_bytes": 1726,
+    "model_coverage_percent": 61.93039110154288,
+    "literal_bytes": 1061,
+    "ref_count": 14,
+    "token_size": 1092,
+    "payload_size": 568,
+    "container_size": 672,
+    "transport_reduction_percent": 75.8880516684607,
+    "target_sha_absent_from_training": true,
+    "byte_equal": true,
+    "sha256_equal": true,
+    "shared_brotli_rfc9841": false,
+    "unix_ns": 1785434766999480425,
+    "temporal_slot": 1702723280906
+  },
+  "max_coverage_profile": {
+    "profile": [4, 8, 16],
+    "codec": "brotli-11-refstream",
+    "container_size": 937,
+    "covered_bytes": 1860,
+    "literal_bytes": 927,
+    "model_bytes": 7099,
+    "model_chunks": 184,
+    "model_coverage_percent": 66.7384284176534,
+    "payload_size": 833,
+    "ref_count": 187,
+    "token_size": 1365,
+    "transport_reduction_percent": 66.37961966271976
+  },
+  "direct_baselines_bytes": {
+    "raw": 2787,
+    "brotli11": 1282,
+    "bz2_9": 1398,
+    "lzma_extreme": 1496,
+    "zlib9": 1501
+  },
+  "best_vs_direct_brotli_reduction_percent": 47.581903276131044,
+  "cold_total_bytes_model_plus_first_target": 3564,
+  "cold_reduction_percent": -27.879440258342303,
+  "amortized_targets_to_beat_raw": 2,
+  "amortized_targets_to_beat_direct_brotli": 5,
+  "shared_brotli_rfc9841_used": false,
+  "notes": [
+    "Target full SHA-256 is explicitly absent from the training manifest.",
+    "Brotli compresses the shared chunk-reference residual stream; the installed Python Brotli runtime does not expose RFC 9841 shared-dictionary APIs.",
+    "Trained Zstandard dictionary and Gabriel-Horn routes are attempted only when their real Python modules are available.",
+    "Model coverage and physical transport reduction are reported separately; model bytes are included in cold-start accounting."
+  ]
+}
