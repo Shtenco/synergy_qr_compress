@@ -1,0 +1,38 @@
+{
+  "summary": {
+    "cases": 12,
+    "geomean_v4": 13.26747874566053,
+    "geomean_v5": 14.457762952274965,
+    "relative_ratio_gain": 1.0897144234735443
+  },
+  "headline_cases": {
+    "real_pdf64": {
+      "source_bytes": 65536,
+      "legacy_v4_bytes": 52501,
+      "fusion_v5_bytes": 18737,
+      "legacy_v4_ratio": 1.2482809851240928,
+      "fusion_v5_ratio": 3.497678390350643,
+      "reduction_vs_v4_percent": 64.31115597798137,
+      "status": "PASS"
+    },
+    "real_png64": {
+      "source_bytes": 65536,
+      "legacy_v4_bytes": 65576,
+      "fusion_v5_bytes": 65533,
+      "legacy_v4_ratio": 0.9993900207392948,
+      "fusion_v5_ratio": 1.0000457784627592,
+      "reduction_vs_v4_percent": 0.06557277052580213,
+      "status": "PASS"
+    },
+    "sparse_weights_8k": {
+      "source_bytes": 8192,
+      "legacy_v4_bytes": 134,
+      "fusion_v5_bytes": 134,
+      "legacy_v4_ratio": 61.134328358208954,
+      "fusion_v5_ratio": 61.134328358208954,
+      "reduction_vs_v4_percent": 0.0,
+      "status": "PASS"
+    }
+  },
+  "note": "The selected-12 benchmark uses the valid exact legacy V4 floor only. V5 may emit the legacy archive unchanged. Full runner is benchmark_fusion_v5_x2.py."
+}
