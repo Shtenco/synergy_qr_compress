@@ -3,11 +3,13 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from decimal import Decimal, ROUND_CEILING, getcontext
 from pathlib import Path
 
 from qr_temporal import TemporalSample, train_temporal_dictionary, pack_v2, unpack_v2, inspect_v2
 
-TARGET_PERCENT = 99.9999999
+getcontext().prec = 50
+TARGET_PERCENT = Decimal("99.9999999")
 
 
 def git_blob_sha1(data: bytes) -> str:
@@ -15,17 +17,18 @@ def git_blob_sha1(data: bytes) -> str:
     return hashlib.sha1(header + data).hexdigest()
 
 
-def reduction_percent(original_bytes: int, encoded_bytes: int) -> float:
+def reduction_percent_decimal(original_bytes: int, encoded_bytes: int) -> Decimal:
     if original_bytes == 0:
-        return 100.0 if encoded_bytes == 0 else float("-inf")
-    return 100.0 * (1.0 - encoded_bytes / original_bytes)
+        return Decimal(100) if encoded_bytes == 0 else Decimal("-Infinity")
+    return Decimal(100) * (Decimal(1) - Decimal(encoded_bytes) / Decimal(original_bytes))
 
 
-def minimum_source_bytes_for_target(encoded_bytes: int, target_percent: float = TARGET_PERCENT) -> int:
-    remaining_fraction = 1.0 - target_percent / 100.0
+def minimum_source_bytes_for_target(encoded_bytes: int, target_percent: Decimal = TARGET_PERCENT) -> int:
     if encoded_bytes <= 0:
         return 0
-    return int(encoded_bytes / remaining_fraction) + 1
+    remaining_fraction = Decimal(1) - target_percent / Decimal(100)
+    required = Decimal(encoded_bytes) / remaining_fraction
+    return int(required.to_integral_value(rounding=ROUND_CEILING))
 
 
 def run(source: Path, unix_ns: int, expected_git_sha: str | None = None) -> dict:
@@ -51,6 +54,9 @@ def run(source: Path, unix_ns: int, expected_git_sha: str | None = None) -> dict
     model_bytes = len(model.to_bytes())
     container_bytes = len(packed.blob)
     cold_total_bytes = model_bytes + container_bytes
+    transport_reduction = reduction_percent_decimal(len(data), container_bytes)
+    timestamp_reduction = reduction_percent_decimal(len(data), 8)
+    cold_reduction = reduction_percent_decimal(len(data), cold_total_bytes)
 
     result = {
         "source": str(source),
@@ -65,12 +71,12 @@ def run(source: Path, unix_ns: int, expected_git_sha: str | None = None) -> dict
         "cold_total_bytes": cold_total_bytes,
         "byte_equal": restored == data,
         "sha256_equal": restored_sha256 == source_sha256,
-        "transport_reduction_percent": reduction_percent(len(data), container_bytes),
-        "timestamp_8byte_theoretical_reduction_percent": reduction_percent(len(data), 8),
-        "cold_reduction_percent": reduction_percent(len(data), cold_total_bytes),
-        "target_percent": TARGET_PERCENT,
-        "target_met_by_transport_container": reduction_percent(len(data), container_bytes) >= TARGET_PERCENT,
-        "target_met_by_8byte_timestamp_only": reduction_percent(len(data), 8) >= TARGET_PERCENT,
+        "transport_reduction_percent": str(transport_reduction),
+        "timestamp_8byte_theoretical_reduction_percent": str(timestamp_reduction),
+        "cold_reduction_percent": str(cold_reduction),
+        "target_percent": str(TARGET_PERCENT),
+        "target_met_by_transport_container": transport_reduction >= TARGET_PERCENT,
+        "target_met_by_8byte_timestamp_only": timestamp_reduction >= TARGET_PERCENT,
         "minimum_source_bytes_for_108_byte_container_at_target": minimum_source_bytes_for_target(108),
         "minimum_source_bytes_for_8_byte_timestamp_at_target": minimum_source_bytes_for_target(8),
         "minimum_source_bytes_for_1_byte_code_at_target": minimum_source_bytes_for_target(1),
