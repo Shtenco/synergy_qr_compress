@@ -1,0 +1,5 @@
+- implement `qr_temporal/fusion_v5_x2.py`
+- exact round-trip tests
+- MEGA-31 comparison vs V4/Brotli/OMNIA
+- real PDF exact normalization proof
+- report core/physical sizes separately for temporal extensions
