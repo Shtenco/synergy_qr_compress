@@ -17,7 +17,7 @@ Target is the real future Git blob `README.md` at `79915e036d80f98be9e72aa6dbd6b
 - decode byte equality: **PASS**
 - decode SHA-256: **PASS**
 
-Stored QTD3 proof for the same target used a richer two-entry model but obtained the same 66.164334% COPY coverage and a **589 B** warm container. QTD4.1 is therefore **18 B / 3.055?% smaller** on this target while preserving the same reconstructed-byte coverage. Exact calculated reduction is `100*(1-571/589) = 3.055?%` (rounding in reports should be generated programmatically).
+Stored QTD3 proof for the same target used a richer two-entry model but obtained the same 66.164334% COPY coverage and a **589 B** warm container. QTD4.1 is therefore **18 B / 3.056027% smaller** on this target while preserving the same reconstructed-byte coverage.
 
 The selected literal predictor on this large newly inserted README section was `raw`; historical n-gram prediction was tested but MDL correctly rejected it. This is an important negative result: V4.1 does not force context prediction when it increases description length.
 
