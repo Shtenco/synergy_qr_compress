@@ -4,10 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "shtenco-qr-compress"
-version = "0.1.0"
-description = "Lossless temporal container + adaptive compression + multi-QR framing"
+version = "0.2.0"
+description = "QTC1/QTC2 lossless temporal-model compression with multi-QR framing"
 requires-python = ">=3.10"
-dependencies = ["qrcode[pil]>=7.4"]
+dependencies = [
+  "qrcode[pil]>=7.4",
+  "zstandard>=0.22",
+  "brotli>=1.1",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
