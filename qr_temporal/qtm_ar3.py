@@ -12,7 +12,8 @@ MAGIC=b"QAP3"; MAGIC_X=b"QXU3"; VER=1
 H=ar2.H
 H_MIN=struct.Struct(">4sB16s32s")
 LENS=(2,3,4,5,6,8,12,16)
-MAX_VOCAB=512
+DEFAULT_VOCAB=512
+ALLOWED_VOCAB=(64,128,256,512,1024,2048,4096,8192,16384)
 
 
 def _tw(a,t):
@@ -21,7 +22,7 @@ def _tw(a,t):
 
 
 class Vocabulary:
-    def __init__(self,model,path,ts):
+    def __init__(self,model,path,ts,max_vocab=DEFAULT_VOCAB):
         c={}
         for e in model.entries:
             if e.unix_ns>=ts:continue
@@ -33,7 +34,7 @@ class Vocabulary:
                 if len(c)>120000:
                     c=dict(sorted(c.items(),key=lambda z:(-z[1]*(len(z[0])-1),-len(z[0]),z[0]))[:60000])
         a=[(n*(len(p)-1),n,len(p),p) for p,n in c.items() if n>=2]
-        a.sort(key=lambda x:(-x[0],-x[2],-x[1],x[3]));a=a[:MAX_VOCAB]
+        a.sort(key=lambda x:(-x[0],-x[2],-x[1],x[3]));a=a[:max_vocab]
         self.p=[x[3] for x in a];self.n=[x[1] for x in a]
         self.by=defaultdict(list)
         for r,p in enumerate(self.p):self.by[p[0]].append(r)
@@ -175,15 +176,16 @@ def _unside(data,v):
     return ev
 
 
-def pack_temporal(target,path,model,ts,*,m=1048576,k=1,min_phrase_len=2,q41_blob=None):
+def pack_temporal(target,path,model,ts,*,m=1048576,k=1,min_phrase_len=2,vocab_size=DEFAULT_VOCAB,q41_blob=None):
     target=bytes(target);dg=hashlib.sha256(target).digest()
     if model.max_unix_ns>=ts or any(e.digest==dg for e in model.entries):raise ValueError("leakage")
     paths=_paths(model)
     if path not in paths:raise ValueError("path absent from shared model")
+    if vocab_size not in ALLOWED_VOCAB:raise ValueError("unsupported vocab size")
     if q41_blob is None:q41_blob=q41.pack(target,path,model,ts)
-    _,segs=ar1.q41_segments(q41_blob);pi=ar1.path_index(path,model);v=Vocabulary(model,path,ts)
+    _,segs=ar1.q41_segments(q41_blob);pi=ar1.path_index(path,model);v=Vocabulary(model,path,ts,vocab_size)
     ev=_plan(v,target,segs,min_phrase_len)
-    side=q41.uv(paths.index(path))+q41.uv(len(segs))+_side(ev,v)
+    side=q41.uv(paths.index(path))+q41.uv(len(segs))+q41.uv(vocab_size)+_side(ev,v)
     ae=ar1.ArithmeticEncoder();ar2._encode_skeleton_into(ae,segs,model,path,ts);_encode_raw(ae,target,segs,ev,model,pi,ts,v)
     core=H_MIN.pack(MAGIC_X,VER,model.model_id[:16],dg)+ae.finish()
     return core,_temporal_encode(_bits(side),ts,m,k),{"events":len(ev),"covered":sum(len(v.p[r]) for _,r in ev),"side_bytes":len(side)}
@@ -194,10 +196,11 @@ def unpack_temporal(core,timestamps,model,*,m=1048576,k=1):
     if magic!=MAGIC_X or ver!=VER or mid!=model.model_id[:16]:raise ValueError("header")
     ts=timestamps[0]
     if model.max_unix_ns>=ts:raise ValueError("temporal cutoff")
-    side=_b2(_temporal_bits(timestamps,m,k));p=0;pid,p=q41.rv(side,p);count,p=q41.rv(side,p)
+    side=_b2(_temporal_bits(timestamps,m,k));p=0;pid,p=q41.rv(side,p);count,p=q41.rv(side,p);vocab_size,p=q41.rv(side,p)
     paths=_paths(model)
     if pid>=len(paths):raise ValueError("path")
-    path=paths[pid];v=Vocabulary(model,path,ts);ev=_unside(side[p:],v);pi=ar1.path_index(path,model)
+    if vocab_size not in ALLOWED_VOCAB:raise ValueError("unsupported vocab size")
+    path=paths[pid];v=Vocabulary(model,path,ts,vocab_size);ev=_unside(side[p:],v);pi=ar1.path_index(path,model)
     ad=ar2.GenericArithmeticDecoder(core[H_MIN.size:]);segs=ar2._decode_skeleton_from(ad,count,model,path,ts)
     pos=0;spans=[]
     for s in segs:
