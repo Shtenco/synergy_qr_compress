@@ -1,0 +1,1 @@
+Initial V5 implementation is intentionally narrow: only changes that can be exact-tested immediately are admitted. Speculative neural or format routes stay out until they beat the legacy candidate and pass byte equality + SHA-256.
