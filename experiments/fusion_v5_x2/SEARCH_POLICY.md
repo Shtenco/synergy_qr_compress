@@ -1,0 +1,1 @@
+Search policy: candidate families are admitted only after exact round-trip verification. Negative experiments are documented and kept out of the production router until they beat the current byte frontier on a fixed target.
