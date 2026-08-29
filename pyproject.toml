@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "shtenco-qr-compress"
-version = "0.3.0"
-description = "QTC1/QTC2/QTD2 lossless temporal-model and blind Git-history compression with multi-QR framing"
+version = "0.4.0"
+description = "QTC1/QTC2/QTD2/QTD3 lossless temporal-model and repository walk-forward compression with multi-QR framing"
 requires-python = ">=3.10"
 dependencies = [
   "qrcode[pil]>=7.4",
