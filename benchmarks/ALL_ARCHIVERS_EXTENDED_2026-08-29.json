@@ -1,0 +1,56 @@
+{
+  "schema": "shtenco-all-archivers-extended-2026-08-29",
+  "legacy": {
+    "systems": 76,
+    "frozen_systems": 69,
+    "dataset_count": 11,
+    "dataset_size": 32768,
+    "exact_current_rows": "154/154",
+    "source_commit": "c681ec94fe5194156b71fc304035f7aaff4d2327",
+    "artifact_sha256": "bb769fa6c1b65d697e66d79ac3275b1715ee0c77186669377e783734fcc47296"
+  },
+  "same_corpus_summary": [
+    {"engine": "QTC1", "geomean_ratio": 27.573204077082927, "full_pass": true},
+    {"engine": "QTC2-standalone", "geomean_ratio": 24.486182184377757, "full_pass": true},
+    {"engine": "brotli-11", "geomean_ratio": 24.316416323790477, "full_pass": true},
+    {"engine": "zstd-19", "geomean_ratio": 20.81918922065594, "full_pass": true},
+    {"engine": "lzma-extreme", "geomean_ratio": 18.568363212562716, "full_pass": true},
+    {"engine": "zlib-9", "geomean_ratio": 14.168369213389003, "full_pass": true},
+    {"engine": "bz2-9", "geomean_ratio": 14.103588081201783, "full_pass": true},
+    {"engine": "rans-o0", "geomean_ratio": 1.9029484581739489, "full_pass": true},
+    {"engine": "RAW", "geomean_ratio": 1.0, "full_pass": true}
+  ],
+  "qtc_timing": [
+    {"engine": "QTC1", "geomean_ratio": 27.573204077082927, "geomean_encode_ms": 134.70668558897603, "geomean_decode_ms": 0.10346424579596415, "geomean_score": 0.20469068744825122, "geomean_balanced_score": 7.385799464297159, "total_encode_ms": 1562.5812139996924, "total_decode_ms": 4.4887889989695395},
+    {"engine": "QTC2-standalone", "geomean_ratio": 24.486182184377757, "geomean_encode_ms": 134.28908573917107, "geomean_decode_ms": 0.1019233933167687, "geomean_score": 0.1823393319687732, "geomean_balanced_score": 6.618564123410864, "total_encode_ms": 1555.1834660004715, "total_decode_ms": 4.436742999587295}
+  ],
+  "qtc_rows": [
+    {"dataset": "bip39_text", "original_bytes": 32768, "qtc1_bytes": 153, "qtc2_standalone_bytes": 201, "brotli11_bytes": 93, "zstd19_bytes": 127},
+    {"dataset": "image_like", "original_bytes": 32768, "qtc1_bytes": 184, "qtc2_standalone_bytes": 232, "brotli11_bytes": 1721, "zstd19_bytes": 1766},
+    {"dataset": "json_graph_logs", "original_bytes": 32768, "qtc1_bytes": 2866, "qtc2_standalone_bytes": 2914, "brotli11_bytes": 2806, "zstd19_bytes": 3060},
+    {"dataset": "mixed", "original_bytes": 32768, "qtc1_bytes": 9407, "qtc2_standalone_bytes": 9455, "brotli11_bytes": 9347, "zstd19_bytes": 9688},
+    {"dataset": "random", "original_bytes": 32768, "qtc1_bytes": 32828, "qtc2_standalone_bytes": 32876, "brotli11_bytes": 32772, "zstd19_bytes": 32781},
+    {"dataset": "repeated_text", "original_bytes": 32768, "qtc1_bytes": 104, "qtc2_standalone_bytes": 152, "brotli11_bytes": 44, "zstd19_bytes": 61},
+    {"dataset": "source_code", "original_bytes": 32768, "qtc1_bytes": 237, "qtc2_standalone_bytes": 285, "brotli11_bytes": 177, "zstd19_bytes": 206},
+    {"dataset": "sparse_weights", "original_bytes": 32768, "qtc1_bytes": 606, "qtc2_standalone_bytes": 654, "brotli11_bytes": 726, "zstd19_bytes": 732},
+    {"dataset": "structured_binary", "original_bytes": 32768, "qtc1_bytes": 6744, "qtc2_standalone_bytes": 6792, "brotli11_bytes": 6705, "zstd19_bytes": 12137},
+    {"dataset": "telemetry_csv", "original_bytes": 32768, "qtc1_bytes": 7349, "qtc2_standalone_bytes": 7397, "brotli11_bytes": 7289, "zstd19_bytes": 8155},
+    {"dataset": "version_snapshots", "original_bytes": 32768, "qtc1_bytes": 362, "qtc2_standalone_bytes": 410, "brotli11_bytes": 700, "zstd19_bytes": 740}
+  ],
+  "temporal_qtd2": {
+    "rows": [
+      {"name": "readme-evolution", "source_bytes": 2787, "container_bytes": 672, "profile": [48, 96, 192], "codec": "brotli11", "covered_bytes": 1726, "coverage_percent": 61.93039110154288, "refs": 14, "token_bytes": 1092, "payload_bytes": 568, "model_bytes": 2892, "model_chunks": 18, "sha256_equal": true, "target_sha_absent_training": true},
+      {"name": "new-tier1-v2-test", "source_bytes": 1111, "container_bytes": 577, "profile": [24, 48, 96], "codec": "brotli11", "covered_bytes": 0, "coverage_percent": 0.0, "refs": 0, "token_bytes": 1114, "payload_bytes": 473, "model_bytes": 11122, "model_chunks": 121, "sha256_equal": true, "target_sha_absent_training": true},
+      {"name": "new-unified-workflow", "source_bytes": 6113, "container_bytes": 1558, "profile": [16, 32, 64], "codec": "brotli11", "covered_bytes": 141, "coverage_percent": 2.306559790610175, "refs": 5, "token_bytes": 5994, "payload_bytes": 1454, "model_bytes": 18407, "model_chunks": 261, "sha256_equal": true, "target_sha_absent_training": true}
+    ],
+    "aggregate": {"source": 10011, "container": 2807, "covered": 1867, "model_cold_sum": 32421, "transport_reduction_percent": 71.96084307262012, "weighted_coverage_percent": 18.649485565877534}
+  },
+  "temporal_qtd3": {
+    "aggregate": {"brotli11_bytes": 3195, "covered_bytes": 4010, "qtd3_container_bytes": 2392, "qtd3_transport_reduction_percent": 76.10628308860254, "qtd3_vs_brotli11_reduction_percent": 25.13302034428795, "source_bytes": 10011, "target_count": 3, "weighted_model_coverage_percent": 40.05593846768554},
+    "rows": [
+      {"name": "readme-evolution", "path": "README.md", "target_bytes": 2787, "container_bytes": 589, "covered_bytes": 1844, "coverage_percent": 66.1643344097596, "brotli11_bytes": 1282, "byte_equal": true, "sha256_equal": true, "target_sha_absent_training": true},
+      {"name": "new-tier1-v2-test", "path": "compression_lab/test_tier1_v2.py", "target_bytes": 1111, "container_bytes": 421, "covered_bytes": 907, "coverage_percent": 81.63816381638163, "brotli11_bytes": 461, "byte_equal": true, "sha256_equal": true, "target_sha_absent_training": true},
+      {"name": "new-unified-workflow", "path": ".github/workflows/unified_tier1_v2_benchmark.yml", "target_bytes": 6113, "container_bytes": 1382, "covered_bytes": 1259, "coverage_percent": 20.59545231473908, "brotli11_bytes": 1452, "byte_equal": true, "sha256_equal": true, "target_sha_absent_training": true}
+    ]
+  }
+}
