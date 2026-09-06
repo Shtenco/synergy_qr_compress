@@ -1,0 +1,28 @@
+name: Federation Offline Data Fabric
+
+on:
+  push:
+    paths:
+      - 'federation/**'
+      - 'tests/test_federation_offline_manifest.py'
+      - '.github/workflows/federation-offline-data-fabric.yml'
+  pull_request:
+    paths:
+      - 'federation/**'
+      - 'tests/test_federation_offline_manifest.py'
+      - '.github/workflows/federation-offline-data-fabric.yml'
+
+jobs:
+  offline-data-fabric:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate consumer registry
+        run: python -m json.tool federation/consumer_registry_v1.json >/dev/null
+      - name: Compile federation adapter
+        run: python -m compileall -q federation
+      - name: Run federation adapter tests
+        run: python -m unittest -v tests.test_federation_offline_manifest
