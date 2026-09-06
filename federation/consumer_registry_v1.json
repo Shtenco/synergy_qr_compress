@@ -1,0 +1,34 @@
+{
+  "schema": "synergy.qtc-consumer-registry/v1",
+  "owner": "Shtenco/qr_compress",
+  "authority": "NONE",
+  "profiles": ["QTC1", "QTC2_EXACT", "QTC2_PATCH", "QTC2_STANDALONE", "QF1"],
+  "consumers": [
+    {"repo": "Shtenco/synergy_pay_system", "payloads": ["PAYMENT_INTENT_REFERENCE", "SETTLEMENT_RECEIPT_REFERENCE"]},
+    {"repo": "Shtenco/synergy_app", "payloads": ["USER_BACKUP_FRAGMENT", "SETTLEMENT_RECEIPT_REFERENCE"]},
+    {"repo": "Shtenco/sinergy-super-app", "payloads": ["EVIDENCE_MANIFEST_REFERENCE", "SETTLEMENT_RECEIPT_REFERENCE"]},
+    {"repo": "Shtenco/blochain_budget", "payloads": ["PUBLIC_BUDGET_PROOF_REFERENCE"]},
+    {"repo": "Shtenco/nexus_science_agent", "payloads": ["SCIENCE_SAMPLE_REFERENCE", "EVIDENCE_MANIFEST_REFERENCE"]},
+    {"repo": "Shtenco/synergy_meta_os", "payloads": ["NODE_ENROLLMENT_REFERENCE", "EVIDENCE_MANIFEST_REFERENCE"]},
+    {"repo": "Shtenco/synergynet", "payloads": ["EVIDENCE_MANIFEST_REFERENCE", "CHAIN_PROOF_REFERENCE"]},
+    {"repo": "Shtenco/synergy_metachain", "payloads": ["CHAIN_PROOF_REFERENCE"]}
+  ],
+  "required_guards": [
+    "canonical content SHA-256",
+    "shared model SHA-256 for QTC2 exact/patch",
+    "temporal slot for QTC2 exact/patch",
+    "expiry",
+    "replay nonce",
+    "signature algorithm",
+    "external signing key reference",
+    "target-domain revalidation",
+    "authorization_conferred=false"
+  ],
+  "explicit_non_claims": [
+    "timestamp is not infinite information storage",
+    "shared-model coverage is not arbitrary-file compression ratio",
+    "QR presence is not authorization",
+    "offline transport is not settlement",
+    "QTC decode success is not semantic approval"
+  ]
+}
