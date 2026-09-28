@@ -236,3 +236,38 @@ QTC2 может сделать **QR-carried residual** крайне малым �
 - animated/video QR transport;
 - Merkle chunk index и random access;
 - corpus benchmark против QTC1, ZIP/QR, zstd/QR, Shared Brotli и `ai_compress` engines.
+
+
+<!-- SYNERGY-FEDERATION-PASSPORT:START -->
+---
+
+## 🧭 SYNERGY federation passport
+
+**Домен:** 🗜️ Temporal compression R&D  
+**Архитектурный родитель:** [`synergy_meta_os`](https://github.com/Shtenco/synergy_meta_os)  
+**Архитектурный корень:** [`synergy_system`](https://github.com/Shtenco/synergy_system)
+
+```mermaid
+flowchart LR
+    SYS[🧭 synergy_system] --> P[synergy_meta_os]
+    P --> THIS[synergy_qr_compress]
+    THIS --> E[📦 Evidence / outputs]
+```
+
+Архитектурная принадлежность не заменяет доказанную интеграцию. Runtime-связь должна подтверждаться контрактами, manifests, deployment-конфигурацией или тестами.
+
+### Федерационный принцип
+
+Каждый репозиторий отвечает только за свой тип истины и не должен незаметно присваивать полномочия соседнего домена.
+
+### Навигация
+
+- [📚 Атлас 75 репозиториев](https://github.com/Shtenco/synergy_system/blob/main/docs/SYNERGY_REPOSITORY_ATLAS.md)
+- [🧾 Registry](https://github.com/Shtenco/synergy_system/blob/main/registry/SYNERGY_REPOSITORIES.json)
+- [🧭 Architecture root](https://github.com/Shtenco/synergy_system)
+
+### Evidence rule
+
+Любое сильное утверждение должно указывать на воспроизводимый тест, benchmark, ledger/evidence artifact или формально проверяемый контракт.
+
+<!-- SYNERGY-FEDERATION-PASSPORT:END -->
