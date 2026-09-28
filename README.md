@@ -271,3 +271,36 @@ flowchart LR
 Любое сильное утверждение должно указывать на воспроизводимый тест, benchmark, ledger/evidence artifact или формально проверяемый контракт.
 
 <!-- SYNERGY-FEDERATION-PASSPORT:END -->
+
+---
+
+# 🔳 Глубокий доказательный паспорт QR Compress
+
+## Реальный evidence stack
+
+QTC2 дополнен QTD2/QTD3, blind Git-history proof, real-file proof и walk-forward proof. Это существенно сильнее controlled one-byte benchmark.
+
+```mermaid
+flowchart LR
+    HIST[Past corpus/history] --> MODEL[Temporal model]
+    MODEL --> FUT[Future/unseen sample]
+    FUT --> RES[Residual]
+    RES --> CONT[QTC/QTD container]
+    CONT --> VERIFY[SHA256 exact restore]
+```
+
+## Главная семантическая граница
+
+Timestamp — адрес shared model, а не магическое хранение произвольного файла в нескольких байтах. Payload size должен оцениваться вместе со стоимостью/доступностью shared model.
+
+## Evidence anchors
+
+- `proofs/QTD2_BLIND_GIT_HISTORY_PROOF.md`;
+- `proofs/QTD3_WALK_FORWARD_REAL_PROOF.md`;
+- `proofs/REAL_REPOSITORY_FILE_PROOF.md`;
+- `benchmark_qtd3_walkforward.py`;
+- `tests/test_qtd3.py`.
+
+## Следующий рубеж
+
+model amortization accounting → unrelated-repo OOS corpora → corruption/loss QR stress → mobile decode benchmark → compare total storage model+payload against standard archivers.
