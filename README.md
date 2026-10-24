@@ -1,3 +1,9 @@
+<!-- RESEARCH-V2-2026:START -->
+<img src="assets/readme/scientific-process-v2.svg" width="100%" alt="QTD3 / TEMPORAL LOSSLESS COMPRESSION"/>
+
+[Детальное научное досье V2](docs/SCIENTIFIC_DOSSIER_V2_2026.md) — алгоритмы, формулы и эксперименты. Оригинальный README ниже сохранён полностью.
+<!-- RESEARCH-V2-2026:END -->
+
 # SHTENCO QR Compress — QTC1 + QTC2 Temporal Dictionary Engine
 
 Независимый lossless-проект для упаковки информации в QR-последовательности с temporal addressing. `Shtenco/ai_compress` не изменяется.
